@@ -11,6 +11,10 @@ const store = fileStore({
   verbose: true
 })
 
+// 1. YourStore => failure => YourStore1 (default)
+// 2. YourStore => parallel => YourStore1 (not implemented)
+// store.use(new YourStore())
+// store.use(new YourStore1())
 store.use(new LocalStore({
   root: path.join(__dirname, './upload')
 }))
