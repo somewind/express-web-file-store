@@ -16,6 +16,8 @@ const store = fileStore({
 // store.use(new YourStore())
 // store.use(new YourStore1())
 store.use(new LocalStore({
+  // Read-only addresses can have multiple, sequential reads
+  rootReadonly: ['/a/b/path'],
   root: path.join(__dirname, './upload')
 }))
 

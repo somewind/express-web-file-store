@@ -11,6 +11,7 @@ import {
 } from './util'
 
 const defaultOptions = {
+  rootReadonly: [],
   root: '',
   createParentPath: true,
   static: {
@@ -28,7 +29,20 @@ export default class LocalStore {
     checkParam(!options.root, 'options.root can not be null.')
 
     this.options = lodash.merge({}, defaultOptions, options, mustOptions)
-    this.staticMiddleware = express.static(this.options.root, this.options.static)
+    const { rootReadonly, root } = this.options
+    const readDirs = []
+    if (typeof rootReadonly === 'string') {
+      readDirs.push(rootReadonly)
+    } else if (Array.isArray(rootReadonly)) {
+      readDirs.push(...rootReadonly)
+    }
+    readDirs.push(root)
+
+    this.staticMiddlewares = readDirs.map(readDir => {
+      const mid = express.static(readDir, this.options.static)
+      mid.root = readDir
+      return mid
+    })
   }
 
   _filepath (req) {
@@ -36,17 +50,17 @@ export default class LocalStore {
     return filepath
   }
 
-  get (req, res) {
-    return new Promise(async (resolve, reject) => {
-      const filepath = this._filepath(req)
-      this.staticMiddleware(req, res, err => {
+  async get (req, res) {
+    const readMiddleware = (middleware) => new Promise(async (resolve, reject) => {
+      const filepath = path.join(middleware.root, req.params.filepath)
+      middleware(req, res, err => {
         if (err) {
           if (err.status === 404) {
             err.msg = 'No file found.'
           } else {
             err.msg = 'IO failed.'
           }
-          reject(err)
+          resolve(err)
         }
       })
       const exist = await asyncAccess(filepath)
@@ -54,6 +68,15 @@ export default class LocalStore {
         resolve()
       }
     })
+
+    let err
+    for (let i = 0; i < this.staticMiddlewares.length; i++) {
+      err = await readMiddleware(this.staticMiddlewares[i])
+      if (!err) {
+        return
+      }
+    }
+    throw err
   }
 
   async put (req, res) {
