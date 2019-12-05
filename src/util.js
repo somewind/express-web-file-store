@@ -53,6 +53,13 @@ export const asyncMkdirp = async (dirname, mode) => {
   const exist = await asyncAccess(dirname)
   if (!exist) {
     await asyncMkdirp(path.dirname(dirname))
-    await asyncMkdir(dirname, mode)
+    try {
+      await asyncMkdir(dirname, mode)
+    } catch (e) {
+      // may be created asynchronously by another, ignore EEXIST error
+      if (e.code !== 'EEXIST') {
+        throw e
+      }
+    }
   }
 }
