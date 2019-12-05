@@ -1,3 +1,12 @@
+## [1.0.2](https://github.com/somewind/express-web-file-store/compare/v1.0.1...v1.0.2) (2019-12-05)
+
+
+### Bug Fixes
+
+* io error ([e798148](https://github.com/somewind/express-web-file-store/commit/e798148))
+
+
+
 ## 1.0.1 (2019-11-06)
 
 
