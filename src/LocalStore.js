@@ -80,16 +80,22 @@ export default class LocalStore {
   }
 
   async put (req, res) {
+    const filepath = this._filepath(req)
+    const files = Object.values(req.files)
+    const file = files[0]
+    // try create parent path
     try {
-      const filepath = this._filepath(req)
-      const files = Object.values(req.files)
-      const file = files[0]
       if (this.options.createParentPath) {
         const dirname = path.dirname(filepath)
+
         if (!await asyncAccess(dirname)) {
           await asyncMkdirp(dirname, 0o755)
         }
       }
+    } catch (e) {
+    // do nothing
+    }
+    try {
       await asyncWrapperWithError(file.mv)(filepath)
     } catch (e) {
       e.msg = 'IO failed.'
