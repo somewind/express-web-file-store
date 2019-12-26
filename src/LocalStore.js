@@ -1,6 +1,7 @@
 import path from 'path'
 import express from 'express'
 import lodash from 'lodash'
+import fs from 'fs'
 import {
   checkParam,
   asyncWrapperWithError,
@@ -96,7 +97,17 @@ export default class LocalStore {
     // do nothing
     }
     try {
-      await asyncWrapperWithError(file.mv)(filepath)
+      // do not use file.mv, problems with high concurrency
+      // await asyncWrapperWithError(file.mv)(filepath)
+
+      // // error when cross-device, ERROR EXDEV: cross-device link not permitted
+      //   await asyncWrapperWithError(fs.rename)(file.tempFilePath, filepath)
+      await asyncWrapperWithError(fs.copyFile)(file.tempFilePath, filepath)
+      try {
+        await asyncWrapperWithError(fs.unlink)(file.tempFilePath)
+      } catch (e) {
+        // do nothing
+      }
     } catch (e) {
       e.msg = 'IO failed.'
       throw e

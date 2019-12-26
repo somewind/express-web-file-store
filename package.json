@@ -1,11 +1,12 @@
 {
   "name": "express-web-file-store",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "description": "express middleware to get/post/delete files with multiple custom backends.",
   "author": "somewind <neverstopsteps@gmail.com> (https://github.com/somewind)",
   "main": "lib/index.js",
   "scripts": {
+    "prepublishOnly": "yarn run release",
     "build": "babel src --out-dir lib --delete-dir-on-start --verbose --source-maps --watch",
     "release": "babel src --out-dir lib --delete-dir-on-start --verbose",
     "commit": "git-cz",
