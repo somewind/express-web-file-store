@@ -1,3 +1,13 @@
+## [1.0.5](https://github.com/somewind/express-web-file-store/compare/v1.0.2...v1.0.5) (2019-12-26)
+
+
+### Bug Fixes
+
+* ERROR EXDEV: cross-device ([ac51096](https://github.com/somewind/express-web-file-store/commit/ac51096))
+* ignore mkdir error ([3eec08f](https://github.com/somewind/express-web-file-store/commit/3eec08f))
+
+
+
 ## [1.0.3](https://github.com/somewind/express-web-file-store/compare/v1.0.2...v1.0.3) (2019-12-25)
 
 
