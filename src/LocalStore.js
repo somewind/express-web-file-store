@@ -103,11 +103,13 @@ export default class LocalStore {
       // // error when cross-device, ERROR EXDEV: cross-device link not permitted
       //   await asyncWrapperWithError(fs.rename)(file.tempFilePath, filepath)
       await asyncWrapperWithError(fs.copyFile)(file.tempFilePath, filepath)
-      try {
-        await asyncWrapperWithError(fs.unlink)(file.tempFilePath)
-      } catch (e) {
-        // do nothing
-      }
+      // cancel delete tempFilePath
+      // copyFile will conflict with unlink, sometimes slower than unlink
+      // try {
+      //   await asyncWrapperWithError(fs.unlink)(file.tempFilePath)
+      // } catch (e) {
+      //   // do nothing
+      // }
     } catch (e) {
       e.msg = 'IO failed.'
       throw e
