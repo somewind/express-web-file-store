@@ -1,3 +1,12 @@
+## [1.0.6](https://github.com/somewind/express-web-file-store/compare/v1.0.5...v1.0.6) (2020-01-07)
+
+
+### Bug Fixes
+
+* fix unlink copyFile error ([81ddb58](https://github.com/somewind/express-web-file-store/commit/81ddb58))
+
+
+
 ## [1.0.5](https://github.com/somewind/express-web-file-store/compare/v1.0.2...v1.0.5) (2019-12-26)
 
 
