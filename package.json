@@ -1,6 +1,6 @@
 {
   "name": "express-web-file-store",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "license": "MIT",
   "description": "express middleware to get/post/delete files with multiple custom backends.",
   "author": "somewind <neverstopsteps@gmail.com> (https://github.com/somewind)",
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "express-fileupload": "^1.1.4",
+    "express-fileupload-temp-file": "^1.0.0",
     "lodash": "^4.17.11"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 import express from 'express'
-import fileUplaod from 'express-fileupload'
+import fileUplaod from 'express-fileupload-temp-file'
 import lodash from 'lodash'
 import {
   hasErrorHandler,

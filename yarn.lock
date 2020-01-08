@@ -1139,6 +1139,13 @@ busboy@^0.2.14:
     dicer "0.2.5"
     readable-stream "1.1.x"
 
+busboy@^0.3.1:
+  version "0.3.1"
+  resolved "http://r.tnpm.oa.com/busboy/download/busboy-0.3.1.tgz#170899274c5bf38aae27d5c62b71268cd585fd1b"
+  integrity sha1-FwiZJ0xb84quJ9XGK3EmjNWF/Rs=
+  dependencies:
+    dicer "0.3.0"
+
 bytes@3.1.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
@@ -1715,6 +1722,13 @@ dicer@0.2.5:
     readable-stream "1.1.x"
     streamsearch "0.1.2"
 
+dicer@0.3.0:
+  version "0.3.0"
+  resolved "http://r.tnpm.oa.com/dicer/download/dicer-0.3.0.tgz#eacd98b3bfbf92e8ab5c2fdb71aaac44bb06b872"
+  integrity sha1-6s2Ys7+/kuirXC/bcaqsRLsGuHI=
+  dependencies:
+    streamsearch "0.1.2"
+
 doctrine@1.5.0:
   version "1.5.0"
   resolved "https://registry.npmjs.org/doctrine/-/doctrine-1.5.0.tgz#379dce730f6166f76cefa4e6707a159b02c5a6fa"
@@ -1999,6 +2013,13 @@ expand-tilde@^1.2.2:
   integrity sha1-C4HrqJflo9MdHD0QL48BRB5VlEk=
   dependencies:
     os-homedir "^1.0.1"
+
+express-fileupload-temp-file@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/express-fileupload-temp-file/-/express-fileupload-temp-file-1.0.0.tgz#e2be447c6eba5a95a292ed67c63277437851a2ef"
+  integrity sha512-x2rKgx9FbmfUABUHm8W1sIbMvRRcjAu2NWzPTMg9dfp6Aem/myd8fIFXRjPDOyoQhw5y4hxzollOIadOCzwBeg==
+  dependencies:
+    busboy "^0.3.1"
 
 express-fileupload@^1.1.4:
   version "1.1.5"
