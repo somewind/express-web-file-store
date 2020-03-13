@@ -145,4 +145,5 @@ const fileStore = (options = {}) => {
 }
 
 export { default as LocalStore } from './LocalStore'
+export { default as SeaweedFS } from './SeaweedFS'
 export default fileStore

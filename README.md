@@ -5,7 +5,7 @@
 ```js
 import path from 'path'
 import express from 'express'
-import fileStore, { LocalStore } from 'express-web-file-store'
+import fileStore, { LocalStore, SeaweedFS } from 'express-web-file-store'
 
 const store = fileStore({
   verbose: true
@@ -16,9 +16,17 @@ const store = fileStore({
 // store.use(new YourStore())
 // store.use(new YourStore1())
 store.use(new LocalStore({
-  // Read-only addresses can have multiple, sequential reads
+  // Read-only addresses, can have multiple, sequential reads
   rootReadonly: ['/a/b/path'],
+  // Read/Write address
+  // Read Order: rootReadonly -> root
+  // if root not set, Write will throw error
   root: path.join(__dirname, './upload')
+}))
+
+// use seaweedfs store https://github.com/chrislusf/seaweedfs
+store.use(new SeaweedFS({
+  filerServer: 'http://seaweedfs-filer:8888/'
 }))
 
 const app = express()

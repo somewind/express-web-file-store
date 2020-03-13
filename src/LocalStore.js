@@ -13,7 +13,7 @@ import {
 
 const defaultOptions = {
   rootReadonly: [],
-  root: '',
+  root: undefined,
   createParentPath: true,
   static: {
   }
@@ -27,8 +27,6 @@ const mustOptions = {
 
 export default class LocalStore {
   constructor (options = {}) {
-    checkParam(!options.root, 'options.root can not be null.')
-
     this.options = lodash.merge({}, defaultOptions, options, mustOptions)
     const { rootReadonly, root } = this.options
     const readDirs = []
@@ -37,7 +35,10 @@ export default class LocalStore {
     } else if (Array.isArray(rootReadonly)) {
       readDirs.push(...rootReadonly)
     }
-    readDirs.push(root)
+
+    if (typeof root === 'string') {
+      readDirs.push(root)
+    }
 
     this.staticMiddlewares = readDirs.map(readDir => {
       const mid = express.static(readDir, this.options.static)
@@ -46,7 +47,7 @@ export default class LocalStore {
     })
   }
 
-  _filepath (req) {
+  _writeFilepath (req) {
     const filepath = path.join(this.options.root, req.params.filepath)
     return filepath
   }
@@ -81,7 +82,14 @@ export default class LocalStore {
   }
 
   async put (req, res) {
-    const filepath = this._filepath(req)
+    if(!this.options.root) {
+      const e = new Error('Not Implemented')
+      e.msg = 'Not Implemented'
+      e.status = 501
+      throw e
+    }
+
+    const filepath = this._writeFilepath(req)
     const files = Object.values(req.files)
     const file = files[0]
     // try create parent path
@@ -117,7 +125,14 @@ export default class LocalStore {
   }
 
   async delete (req, res) {
-    const filepath = this._filepath(req)
+    if(!this.options.root) {
+      const e = new Error('Not Implemented')
+      e.msg = 'Not Implemented'
+      e.status = 501
+      throw e
+    }
+
+    const filepath = this._writeFilepath(req)
     let stat
     try {
       [ stat ] = await asyncStat(filepath)
