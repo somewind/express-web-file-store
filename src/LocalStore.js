@@ -3,7 +3,6 @@ import express from 'express'
 import lodash from 'lodash'
 import fs from 'fs'
 import {
-  checkParam,
   asyncWrapperWithError,
   asyncAccess,
   asyncMkdirp,
@@ -82,7 +81,7 @@ export default class LocalStore {
   }
 
   async put (req, res) {
-    if(!this.options.root) {
+    if (!this.options.root) {
       const e = new Error('Not Implemented')
       e.msg = 'Not Implemented'
       e.status = 501
@@ -125,7 +124,7 @@ export default class LocalStore {
   }
 
   async delete (req, res) {
-    if(!this.options.root) {
+    if (!this.options.root) {
       const e = new Error('Not Implemented')
       e.msg = 'Not Implemented'
       e.status = 501
