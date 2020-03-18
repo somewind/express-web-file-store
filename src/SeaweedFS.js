@@ -5,7 +5,10 @@ import FormData from 'form-data'
 import url from 'url'
 
 const defaultOptions = {
-  filerServer: 'http://seaweedfs-filer:8888/'
+  filerServer: 'http://seaweedfs-filer:8888/',
+  etag: true, // default true
+  lastModified: true, // default true
+  maxAge: 0 // ms, default 0 ms
 }
 
 export default class SeaweedFS {
@@ -31,6 +34,18 @@ export default class SeaweedFS {
       responseType: 'stream'
     })
     if (response.status === 200) {
+      res.set('Content-Type', response.headers['content-type'])
+      res.set('Content-Length', response.headers['content-length'])
+      // set cache
+      if (this.options.etag) {
+        res.set('Etag', response.headers['etag'])
+      }
+      if (this.options.lastModified) {
+        res.set('Last-Modified', response.headers['last-modified'])
+      }
+      if (this.options.maxAge !== 0) {
+        res.set('Cache-Control', `public, max-age=${this.options.maxAge}`)
+      }
       response.data.pipe(res)
     } else {
       const e = new Error(response.statusText)

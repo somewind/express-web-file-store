@@ -21,12 +21,19 @@ store.use(new LocalStore({
   // Read/Write address
   // Read Order: rootReadonly -> root
   // if root not set, Write will throw error
-  root: path.join(__dirname, './upload')
+  root: path.join(__dirname, './upload'),
+  // see https://www.expressjs.com.cn/4x/api.html#express.static
+  static: {
+    maxAge: 31536000 * 1000 // ms, default 0 ms
+  }
 }))
 
 // use seaweedfs store https://github.com/chrislusf/seaweedfs
 store.use(new SeaweedFS({
-  filerServer: 'http://seaweedfs-filer:8888/'
+  filerServer: 'http://seaweedfs-filer:8888/',
+  etag: true, // default true
+  lastModified: true, // default true
+  maxAge: 31536000 * 1000 // ms, default 0 ms
 }))
 
 const app = express()
