@@ -1,3 +1,19 @@
+## [1.0.10](https://github.com/somewind/express-web-file-store/compare/v1.0.5...v1.0.10) (2020-03-18)
+
+
+### Bug Fixes
+
+* fix unlink copyFile error ([81ddb58](https://github.com/somewind/express-web-file-store/commit/81ddb58))
+* tempfile upload no such file or directory error ([fba7f24](https://github.com/somewind/express-web-file-store/commit/fba7f24))
+
+
+### Features
+
+* SeaweedFS support cache ([79c7e1c](https://github.com/somewind/express-web-file-store/commit/79c7e1c))
+* support SeaweedFS ([3703f2e](https://github.com/somewind/express-web-file-store/commit/3703f2e))
+
+
+
 ## [1.0.7](https://github.com/somewind/express-web-file-store/compare/v1.0.5...v1.0.7) (2020-01-08)
 
 
