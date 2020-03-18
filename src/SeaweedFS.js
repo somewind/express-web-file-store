@@ -31,7 +31,8 @@ export default class SeaweedFS {
     }
 
     const response = await axios.get(fileUrl, {
-      responseType: 'stream'
+      responseType: 'stream',
+      validateStatus: null
     })
     if (response.status === 200) {
       res.set('Content-Type', response.headers['content-type'])
@@ -43,8 +44,8 @@ export default class SeaweedFS {
       if (this.options.lastModified) {
         res.set('Last-Modified', response.headers['last-modified'])
       }
-      if (this.options.maxAge !== 0) {
-        res.set('Cache-Control', `public, max-age=${this.options.maxAge}`)
+      if (typeof this.options.maxAge === 'number' && this.options.maxAge !== 0) {
+        res.set('Cache-Control', `public, max-age=${this.options.maxAge / 1000}`)
       }
       response.data.pipe(res)
     } else {
@@ -89,7 +90,9 @@ export default class SeaweedFS {
       throw e
     }
 
-    const response = await axios.delete(fileUrl)
+    const response = await axios.delete(fileUrl, {
+      validateStatus: null
+    })
     if (response.status !== 204) {
       const e = new Error(response.statusText)
       e.status = response.status

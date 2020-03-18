@@ -1,6 +1,6 @@
 {
   "name": "express-web-file-store",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "license": "MIT",
   "description": "express middleware to get/post/delete files with multiple custom backends.",
   "author": "somewind <neverstopsteps@gmail.com> (https://github.com/somewind)",
