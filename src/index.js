@@ -144,6 +144,7 @@ const fileStore = (options = {}) => {
   return router
 }
 
-export { default as LocalStore } from './LocalStore'
-export { default as SeaweedFS } from './SeaweedFS'
+export { default as LocalStore } from './plugins/LocalStore'
+export { default as SeaweedFS } from './plugins/SeaweedFS'
+export { default as AmazonS3 } from './plugins/AmazonS3'
 export default fileStore

@@ -8,7 +8,7 @@ import {
   asyncMkdirp,
   asyncStat,
   asyncUnlink
-} from './util'
+} from '../util'
 
 const defaultOptions = {
   rootReadonly: [],

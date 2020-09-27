@@ -36,6 +36,31 @@ store.use(new SeaweedFS({
   maxAge: 31536000 * 1000 // ms, default 0 ms
 }))
 
+// use Amazon S3 store https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/s3-example-creating-buckets.html
+// S3 Options
+store.use(new AmazonS3({
+  // file operation option
+  bucket: '',
+  etag: true, // default true
+  lastModified: true, // default true
+  maxAge: 31536000 * 1000, // ms, default 0 ms
+  // S3 options begin
+  s3option: {
+    sslEnabled: false,
+    s3ForcePathStyle: true,
+      credentials: {
+      accessKeyId: '',
+      secretAccessKey: '',
+    },
+    endpoint: '',
+    httpOptions: {
+      proxy: '',
+    },
+    region: '',
+    signatureVersion: 'v2'
+  }
+}))
+
 const app = express()
 // POST /filename multipart file
 // DELETE /filename

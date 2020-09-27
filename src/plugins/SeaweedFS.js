@@ -24,9 +24,9 @@ export default class SeaweedFS {
   async get (req, res) {
     const fileUrl = this._getFileUrl(req)
     if (!fileUrl) {
-      const e = new Error('fileUrl is null')
+      const e = new Error('fileUrl can not be null.')
       e.status = 404
-      e.msg = 'fileUrl is null'
+      e.msg = 'fileUrl can not be null.'
       throw e
     }
 
@@ -59,9 +59,9 @@ export default class SeaweedFS {
   async put (req, res) {
     const fileUrl = this._getFileUrl(req)
     if (!fileUrl) {
-      const e = new Error('fileUrl is null')
+      const e = new Error('fileUrl can not be null.')
       e.status = 404
-      e.msg = 'fileUrl is null'
+      e.msg = 'fileUrl can not be null.'
       throw e
     }
 
@@ -84,9 +84,9 @@ export default class SeaweedFS {
   async delete (req, res) {
     const fileUrl = this._getFileUrl(req)
     if (!fileUrl) {
-      const e = new Error('fileUrl is null')
+      const e = new Error('fileUrl can not be null.')
       e.status = 404
-      e.msg = 'fileUrl is null'
+      e.msg = 'fileUrl can not be null.'
       throw e
     }
 
